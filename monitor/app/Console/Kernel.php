@@ -29,8 +29,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command(GetNewVideoChannelsByRss::class)->hourly();
-        $schedule->command(GetVideoInfo::class)->everyThirtyMinutes();
+        $schedule->command('get-new-video-channels-by-rss:run')->hourly();
+        $schedule->command('get-video-info:run')->everyThirtyMinutes();
     }
 
     /**
