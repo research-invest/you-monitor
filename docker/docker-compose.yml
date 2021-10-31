@@ -30,3 +30,19 @@ services:
       POSTGRES_DB: db_monitor
     ports:
       - "5432:5432"
+
+  monitor-redis:
+    image: redis
+    restart: always
+    container_name: monitor-redis
+    volumes:
+      - ./data/redis/data:/data
+    ports:
+      - "6379:6379"
+
+  monitor-adminer:
+    container_name: monitor-adminer
+    image: adminer
+    restart: always
+    ports:
+      - "82:82"
