@@ -1,0 +1,32 @@
+version: '3'
+services:
+  monitor-nginx:
+    image: nginx:latest
+    container_name: monitor-nginx
+    volumes:
+      - ./images/nginx:/etc/nginx/conf.d
+      - ../monitor:/var/www/app
+      - ./logs/nginx:/var/log/nginx
+    depends_on:
+      - monitor-php
+      - monitor-postgres
+    ports:
+      - "81:81"
+
+  monitor-php:
+    build: ./images/php
+    container_name: monitor-php
+    environment:
+      APP_DEBUG: 1
+    volumes:
+      - ../monitor:/var/www/app
+
+  monitor-postgres:
+    image: postgres:12.2-alpine
+    container_name: monitor-postgres
+    environment:
+      POSTGRES_USER: dbuser
+      POSTGRES_PASSWORD: pass
+      POSTGRES_DB: db_monitor
+    ports:
+      - "5432:5432"
