@@ -20,6 +20,7 @@ services:
       APP_DEBUG: 1
     volumes:
       - ../monitor:/var/www/app
+      - ./images/php/custom_php.ini:/usr/local/etc/php/conf.d/custom_php.ini
 
   monitor-postgres:
     image: postgres:12.2-alpine
