@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Helpers\FileHelper;
+use App\Helpers\StringHelper;
 use App\Models\ChangeLog;
 use App\Models\HistoryDataVideo;
 use App\Models\Video;
@@ -148,27 +149,19 @@ class GetVideoInfo extends Command
             strpos($content, '"playerConfig":{') - strpos($content, '"videoDetails":{'),
         );
 
-        $toInt = function ($s) {
-            return (int)preg_replace('/[^\-\d]*(\-?\d*).*/', '$1', $s);
-        };
-
-        $toFloat = function ($s) {
-            return (double)filter_var($s, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
-        };
-
-        $getLikes = function ($s) use ($toInt) {
+        $getLikes = function ($s)  {
             preg_match('/({"accessibilityData")?:\"(\d.+)"/U', $s, $likes);
-            return count($likes) === 3 ? $toInt(str_replace([' ', ':', '"', '\\'], '', $likes[0])) : 0;
+            return count($likes) === 3 ? StringHelper::toInt(str_replace([' ', ':', '"', '\\'], '', $likes[0])) : 0;
         };
 
         preg_match('/"averageRating":(.*),/U', $contentViewCountRating, $averageRating);
-        $averageRating = count($averageRating) === 2 ? $toFloat($averageRating[1]) : 0; //4.8610454
+        $averageRating = count($averageRating) === 2 ? StringHelper::toFloat($averageRating[1]) : 0; //4.8610454
 
         preg_match('/"viewCount":(.*),/U', $contentViewCountRating, $viewCount);
-        $viewCount = count($viewCount) === 2 ? $toInt($viewCount[1]) : 0;
+        $viewCount = count($viewCount) === 2 ? StringHelper::toInt($viewCount[1]) : 0;
 
         preg_match('/"lengthSeconds":(.*),/U', $contentViewCountRating, $lengthSeconds);
-        $lengthSeconds = count($lengthSeconds) === 2 ? $toInt($lengthSeconds[1]) : 0;//
+        $lengthSeconds = count($lengthSeconds) === 2 ? StringHelper::toInt($lengthSeconds[1]) : 0;//
 
         $contentDisLike = substr($content,
             strpos($content, '"iconType":"DISLIKE"'), 500);

@@ -107,26 +107,6 @@ class GetNewVideoChannelsByRss extends Command
         }
     }
 
-    protected function getAbout($channelUrl): string
-    {
-        //            //\"channelAboutFullMetadataRenderer\": \{.*\}
-
-
-        // /\"viewCountText\": \{.*\}/mg
-        // /\"joinedDateText\": \{.*\}/mg
-        // /\"country\": \{.*\}/mg
-        // /(\"channelMetadataRenderer\": \{.*\})]/mgs
-
-        // /"rssUrl": "(.*)"./g
-
-        $content = $this->getRequest($channelUrl . '/about');
-        $contentMini = substr($content,
-            strpos($content, '"externalId"'),
-            100,
-        );
-
-        return $contentMini;
-    }
 
     private function getExternalId($channelUrl)
     {
