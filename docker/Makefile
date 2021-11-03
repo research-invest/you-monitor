@@ -8,8 +8,8 @@ monitor-init:
 migrate:
 	docker-compose run --rm monitor-php php artisan migrate --force
 get-channel-info:
-	docker-compose run --rm monitor-php php artisan get-channel-info:run
+	docker-compose run monitor-php php artisan get-channel-info:run
 get-new-video-channels-by-rss:
-	docker-compose run --rm monitor-php php artisan get-new-video-channels-by-rss:run
+	docker-compose run  monitor-php php artisan get-new-video-channels-by-rss:run
 get-video-info:
-	docker-compose run --rm monitor-php php artisan get-video-info:run
+	docker-compose run monitor-php php artisan get-video-info:run
