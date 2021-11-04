@@ -15,9 +15,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//Route::get('/{category?}', [HomeController::class, 'index'])
+Route::get('/', [HomeController::class, 'index'])
 //    ->where(['category' => '[a-z]+'])
-//    ->name('category');
+    ->name('home');
 //
 //Route::get('/admin/activity/{page?}', [AdminController::class, 'index'])
 //    ->where(['page' => '[0-9]+'])
