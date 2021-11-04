@@ -1,11 +1,4 @@
 # you-monitor
 
-
 cron
-
-
-0 */6 * * * cd /home/koval/you-monitor/docker && make get-channel-info
-0 * * * * cd /home/koval/you-monitor/docker && make get-new-video-channels-by-rss
-*/30 * * * * cd /home/koval/you-monitor/docker && make get-video-info
-
-
+* * * * * cd /var/www/app && /usr/local/bin/php artisan schedule:run >> /dev/null 2>&1
