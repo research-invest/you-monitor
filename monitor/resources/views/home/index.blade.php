@@ -16,13 +16,13 @@
     </div>
     <figure class="highcharts-figure">
         <div id="container"></div>
-        <p class="highcharts-description">
-            Chart showing browser market shares. Clicking on individual columns
-            brings up more detailed data. This chart makes use of the drilldown
-            feature in Highcharts to easily switch between datasets.
-        </p>
+{{--        <p class="highcharts-description">--}}
+{{--            Chart showing browser market shares. Clicking on individual columns--}}
+{{--            brings up more detailed data. This chart makes use of the drilldown--}}
+{{--            feature in Highcharts to easily switch between datasets.--}}
+{{--        </p>--}}
     </figure>
-    <h2>Популярые видео</h2>
+    <h2>Популярные видео</h2>
     <div class="table-responsive">
         <table class="table table-striped table-sm">
             <thead>
