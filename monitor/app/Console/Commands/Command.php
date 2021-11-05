@@ -13,14 +13,20 @@ class Command extends LCommand
 
     protected function getRequest($url): string
     {
-        $client = new \GuzzleHttp\Client();
-        $response = $client->request('GET', $url);
+        try {
+            $client = new \GuzzleHttp\Client();
+            $response = $client->request('GET', trim($url));
 
-        $statusCode = $response->getStatusCode();
+            $statusCode = $response->getStatusCode();
 
-        return $response->getBody()->getContents();
+            return $response->getBody()->getContents();
+        } catch (\Exception $exception) {
+            dd([
+                $url,
+                $exception->getMessage(),
+            ]);
+        }
     }
-
 
     protected function downloadPreview($channelId, $videoId): string
     {
