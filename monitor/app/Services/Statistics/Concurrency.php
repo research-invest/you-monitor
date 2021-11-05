@@ -36,7 +36,7 @@ SELECT c.id AS channel_id, c.title AS channel_title, v.id AS video_id, v.title A
 FROM channels AS c
 INNER JOIN history_data_videos AS h ON c.id = h.channel_id
 INNER JOIN videos AS v ON v.id = h.video_id
-GROUP BY c.id, c.title,v.id, v.title
+GROUP BY c.id, c.title, v.id, v.title
 ORDER BY max_views DESC;
 SQL;
 
