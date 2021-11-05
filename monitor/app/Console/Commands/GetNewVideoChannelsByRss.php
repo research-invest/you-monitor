@@ -82,25 +82,26 @@ class GetNewVideoChannelsByRss extends Command
                 $thumbnail = $this->downloadPreview($channel->channel_id, $video->id);
 
                 $data = Video::create([
-                        'video_id' => $video->id,
-                        'channel_id' => $channel->id,
-                        'title' => $video->title,
-                        'description' => $video->description,
-                        'url' => $video->url,
-                        'published_at' => $video->published_at,
-                        'thumbnail_url' => $thumbnail,
-                        'views' => $video->views,
-                        'rating_count' => $video->rating_count
-                    ]);
-
-                $thumbnailPath = Storage::disk(VideoPreview::DISK_NAME)->path($thumbnail);
-
-                VideoPreview::create([
-                    'video_id' => $data->id,
+                    'video_id' => $video->id,
                     'channel_id' => $channel->id,
+                    'title' => $video->title,
+                    'description' => $video->description,
+                    'url' => $video->url,
+                    'published_at' => $video->published_at,
                     'thumbnail_url' => $thumbnail,
-                    'hash' => FileHelper::hashFile($thumbnailPath),
+                    'views' => $video->views,
+                    'rating_count' => $video->rating_count
                 ]);
+
+                if ($thumbnail) {
+                    $thumbnailPath = Storage::disk(VideoPreview::DISK_NAME)->path($thumbnail);
+                    VideoPreview::create([
+                        'video_id' => $data->id,
+                        'channel_id' => $channel->id,
+                        'thumbnail_url' => $thumbnail,
+                        'hash' => FileHelper::hashFile($thumbnailPath),
+                    ]);
+                }
             }
 
             // https://www.youtube.com/feeds/videos.xml?channel_id=UCA73Wknyv1BB7GY_6GhqDmw

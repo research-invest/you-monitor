@@ -35,7 +35,7 @@ class CreateCommonTables extends Migration
             $table->string('url');
             $table->string('video_id');
             $table->dateTime('published_at');
-            $table->string('thumbnail_url');
+            $table->string('thumbnail_url')->nullable();
             $table->integer('views')->nullable();
             $table->integer('rating_count')->nullable();
             $table->integer('length_seconds')->nullable();
