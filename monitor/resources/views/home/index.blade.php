@@ -27,14 +27,18 @@
         <table class="table table-striped table-sm">
             <thead>
             <tr>
-                <th scope="col">Channel</th>
-                <th scope="col">Video</th>
-                <th scope="col">Views</th>
+                <th scope="col">Опубликован</th>
+                <th scope="col">Канал</th>
+                <th scope="col">Видео</th>
+                <th scope="col">Просмотров</th>
             </tr>
             </thead>
             <tbody>
             @foreach ($top20 as $top)
                 <tr>
+                    <td>
+                        {{ $top->video_published_at }}
+                    </td>
                     <td>
                         <a target="_blank" href="{{ $top->channel_url }}">{{ $top->channel_title }}</a>
                     </td>
