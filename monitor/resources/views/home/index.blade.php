@@ -35,7 +35,7 @@
             </tr>
             </thead>
             <tbody>
-            @foreach ($top20 as $top)
+            @foreach ($top50 as $top)
                 <tr>
                     <td>
                         {{ $top->video_published_at }}

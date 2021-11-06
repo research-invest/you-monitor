@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Services\Statistics\Concurrency;
-use App\Services\Statistics\Top20;
+use App\Services\Statistics\TopVideos;
 
 class HomeController extends Controller
 {
@@ -16,14 +16,14 @@ class HomeController extends Controller
     public function index()
     {
         $concurrency = new Concurrency();
-        $top20 = new Top20();
+        $top50 = new TopVideos();
 
         return view('home.index', [
             'concurrency' => [
                 'series' => $concurrency->getSeries(),
                 'drilldown' => $concurrency->getDrilldown(),
             ],
-            'top20' => $top20->getData()
+            'top50' => $top50->getTop50()
         ]);
     }
 }
