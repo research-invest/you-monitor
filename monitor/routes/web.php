@@ -1,8 +1,8 @@
 <?php
 
-use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
+use \App\Http\Controllers\VideoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'index'])
 //    ->where(['category' => '[a-z]+'])
     ->name('home');
-//
-//Route::get('/admin/activity/{page?}', [AdminController::class, 'index'])
-//    ->where(['page' => '[0-9]+'])
-//    ->name('admin');
+
+Route::get('/video/show/{id}', [VideoController::class, 'show'])
+    ->where(['id' => '[0-9]+'])
+    ->name('video_show');

@@ -38,7 +38,12 @@ class Video extends Model
 
     public function getImagePath(): string
     {
-        return  $this->channel_id . '/' . $this->video_id . '.jpg';
+        return $this->channel_id . '/' . $this->video_id . '.jpg';
+    }
+
+    public function getThumbnail(): string
+    {
+        return '/'.VideoPreview::DISK_NAME . '/' . $this->getImagePath(); //@todo переделать
     }
 
 

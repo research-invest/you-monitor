@@ -16,11 +16,11 @@
     </div>
     <figure class="highcharts-figure">
         <div id="container"></div>
-{{--        <p class="highcharts-description">--}}
-{{--            Chart showing browser market shares. Clicking on individual columns--}}
-{{--            brings up more detailed data. This chart makes use of the drilldown--}}
-{{--            feature in Highcharts to easily switch between datasets.--}}
-{{--        </p>--}}
+        {{--        <p class="highcharts-description">--}}
+        {{--            Chart showing browser market shares. Clicking on individual columns--}}
+        {{--            brings up more detailed data. This chart makes use of the drilldown--}}
+        {{--            feature in Highcharts to easily switch between datasets.--}}
+        {{--        </p>--}}
     </figure>
     <h2>Популярные видео</h2>
     <div class="table-responsive">
@@ -32,11 +32,12 @@
                 <th scope="col">Видео</th>
                 <th scope="col">Просмотров</th>
                 <th scope="col">Длительность</th>
+                <th scope="col">Действия</th>
             </tr>
             </thead>
             <tbody>
             @foreach ($top50 as $top)
-                <tr>
+                <tr data-id=" {{ $top->video_id }}">
                     <td>
                         {{ $top->video_published_at }}
                     </td>
@@ -48,6 +49,18 @@
                     </td>
                     <td>{{ number_format($top->max_views, 0, ',', ' ') }}</td>
                     <td>{{ gmdate("i:s", $top->length_seconds) }}</td>
+                    <td>
+                        <div class="btn-group" role="group">
+                            <button id="btnGroupDrop1" type="button" class="btn btn-primary btn-sm dropdown-toggle"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                Действия
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                <li><a class="dropdown-item" href="{{ route('video_show', ['id' => $top->video_id]) }}">Статистика
+                                        видео</a></li>
+                            </ul>
+                        </div>
+                    </td>
                 </tr>
             @endforeach
             </tbody>
@@ -55,8 +68,8 @@
     </div>
 
     <script type="text/javascript">
-        var concurrencySeries = <?= json_encode($concurrency['series'])?>;
-        var concurrencyDrilldown = <?= json_encode($concurrency['drilldown'])?>;
+        let concurrencySeries = <?= json_encode($concurrency['series'])?>;
+        let concurrencyDrilldown = <?= json_encode($concurrency['drilldown'])?>;
 
         Highcharts.chart('container', {
             chart: {
@@ -74,7 +87,7 @@
                 }
             },
             xAxis: {
-                type: 'category'
+                type: 'category',
             },
             yAxis: {
                 title: {
@@ -95,8 +108,18 @@
             },
 
             tooltip: {
-                // headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
-                pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b> of total<br/>'
+                // headerFormat: '<span style="font-size:11px">{point.tes}</span><br>',
+                pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b> of total<br/>',
+
+                // formatter: function () {
+                //     let tooltip = '<span style="color:{point.color}">{point.name}</span>: <b>{this.point.y:.2f}%</b> of total<br/>';
+                //
+                //     if (this.point.tes) {
+                //         tooltip += '<a target="_blank" href="{this.point.tes}">go</a>';
+                //     }
+                //
+                //     return tooltip;
+                // },
             },
 
             series: concurrencySeries,
