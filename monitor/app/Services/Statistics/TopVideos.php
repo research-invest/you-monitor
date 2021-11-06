@@ -13,7 +13,8 @@ class TopVideos
     {
         $sql = <<<SQL
 SELECT v.id AS video_id, v.title AS video_title, v.published_at AS video_published_at, v.url AS video_url,
-       c.url AS channel_url, c.title AS channel_title, MAX(h.views) as max_views, v.length_seconds
+       c.url AS channel_url, c.title AS channel_title, MAX(h.views) as max_views, v.length_seconds,
+       MAX(h.average_rating) as average_rating
 FROM videos AS v
 INNER JOIN history_data_videos AS h ON v.id = h.video_id
 INNER JOIN channels AS c ON c.id = v.channel_id AND c.status = :channel_status

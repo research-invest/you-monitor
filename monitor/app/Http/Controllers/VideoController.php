@@ -21,6 +21,10 @@ class VideoController extends Controller
                 'series' => $video->getViewsSeries(),
                 'categories' => $video->getViewsCategories(),
             ],
+            'averageRating' => [
+                'series' => $video->getAverageRatingSeries(),
+                'categories' => $video->getAverageRatingCategories(),
+            ],
         ]);
     }
 }

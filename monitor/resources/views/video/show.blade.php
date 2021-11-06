@@ -27,6 +27,12 @@
         <div id="container-like-dislike"></div>
     </figure>
 
+
+    <h2>Средний рейтинг</h2>
+    <figure class="highcharts-figure">
+        <div id="container-average-rating"></div>
+    </figure>
+
     <div class="card mb-3" style="max-width: 540px;">
         <div class="row g-0">
             <div class="col-md-4">
@@ -114,6 +120,35 @@
                 }
             },
             series: viewsSeries
+        });
+
+        let averageRatingSeries = <?= json_encode($averageRating['series'])?>;
+        let averageRatingCategories = <?= json_encode($averageRating['categories'])?>;
+
+        Highcharts.chart('container-average-rating', {
+            chart: {
+                type: 'line'
+            },
+            title: {
+                text: 'Динамика рейтинга'
+            },
+            xAxis: {
+                categories: averageRatingCategories
+            },
+            yAxis: {
+                title: {
+                    text: 'Количество'
+                }
+            },
+            plotOptions: {
+                line: {
+                    dataLabels: {
+                        enabled: true
+                    },
+                    enableMouseTracking: false
+                }
+            },
+            series: averageRatingSeries
         });
     </script>
 @endsection

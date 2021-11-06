@@ -11,7 +11,8 @@ class Video
 
     private int $videoId;
     private array $viewsData;
-    private array $likeDislikeDataData;
+    private array $likeDislikeData;
+    private array $averageRatingData;
 
     public function __construct($id)
     {
@@ -19,6 +20,22 @@ class Video
 
         $this->getViewsData();
         $this->getLikeDislikeData();
+        $this->getAverageRatingData();
+    }
+
+    public function getAverageRatingData(): array
+    {
+        $sql = <<<SQL
+SELECT AVG(h.average_rating) AS avg_average_rating,  date_trunc('hour', h.created_at) AS day_time
+FROM history_data_videos AS h
+WHERE h.video_id = :video_id
+GROUP BY day_time
+ORDER BY day_time;
+SQL;
+
+        return $this->averageRatingData = DB::select($sql, [
+            ':video_id' => $this->videoId,
+        ]);
     }
 
     public function getLikeDislikeData(): array
@@ -31,10 +48,11 @@ GROUP BY day_time
 ORDER BY day_time;
 SQL;
 
-        return $this->likeDislikeDataData = DB::select($sql, [
+        return $this->likeDislikeData = DB::select($sql, [
             ':video_id' => $this->videoId,
         ]);
     }
+
     public function getViewsData(): array
     {
         $sql = <<<SQL
@@ -50,11 +68,6 @@ SQL;
         ]);
     }
 
-    public function getViews()
-    {
-    }
-
-
     public function getInfo()
     {
         return ModelVideo::find($this->videoId);
@@ -62,7 +75,7 @@ SQL;
 
     public function getLikeDislikeCategories()
     {
-        return array_column($this->likeDislikeDataData, 'day_time');
+        return array_column($this->likeDislikeData, 'day_time');
     }
 
     public function getLikesSeries()
@@ -70,12 +83,12 @@ SQL;
         return [
             [
                 'name' => 'Like',
-                'data' => array_column($this->likeDislikeDataData, 'max_like')
+                'data' => array_column($this->likeDislikeData, 'max_like')
 
             ],
             [
                 'name' => 'DisLike',
-                'data' => array_column($this->likeDislikeDataData, 'max_dislike')
+                'data' => array_column($this->likeDislikeData, 'max_dislike')
             ],
         ];
 
@@ -94,5 +107,20 @@ SQL;
     public function getViewsCategories(): array
     {
         return array_column($this->viewsData, 'day_time');
+    }
+
+    public function getAverageRatingSeries(): array
+    {
+        return [
+            [
+                'name' => 'Рейтинг',
+                'data' => array_column($this->averageRatingData, 'avg_average_rating'),
+            ]
+        ];
+    }
+
+    public function getAverageRatingCategories(): array
+    {
+      return array_column($this->averageRatingData, 'day_time');
     }
 }

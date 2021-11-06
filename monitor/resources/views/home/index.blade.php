@@ -32,6 +32,7 @@
                 <th scope="col">Видео</th>
                 <th scope="col">Просмотров</th>
                 <th scope="col">Длительность</th>
+                <th scope="col">Рейтинг</th>
                 <th scope="col">Действия</th>
             </tr>
             </thead>
@@ -49,6 +50,7 @@
                     </td>
                     <td>{{ number_format($top->max_views, 0, ',', ' ') }}</td>
                     <td>{{ gmdate("i:s", $top->length_seconds) }}</td>
+                    <td>{{ $top->average_rating}}</td>
                     <td>
                         <div class="btn-group" role="group">
                             <button id="btnGroupDrop1" type="button" class="btn btn-primary btn-sm dropdown-toggle"
