@@ -111,10 +111,13 @@ SQL;
 
     public function getAverageRatingSeries(): array
     {
+        $data = array_column($this->averageRatingData, 'avg_average_rating');
+        $data = array_map(function($v) { return round($v, 2); }, $data);
+
         return [
             [
                 'name' => 'Рейтинг',
-                'data' => array_column($this->averageRatingData, 'avg_average_rating'),
+                'data' => $data,
             ]
         ];
     }
