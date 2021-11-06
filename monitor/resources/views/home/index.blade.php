@@ -76,7 +76,7 @@
                 type: 'column'
             },
             title: {
-                text: 'Конкурентный анализ'
+                text: 'Анализ конкурентов'
             },
             subtitle: {
                 text: 'Клик по колонке показывает детальный анализ каждого видео'
@@ -110,16 +110,6 @@
             tooltip: {
                 // headerFormat: '<span style="font-size:11px">{point.tes}</span><br>',
                 pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b> of total<br/>',
-
-                // formatter: function () {
-                //     let tooltip = '<span style="color:{point.color}">{point.name}</span>: <b>{this.point.y:.2f}%</b> of total<br/>';
-                //
-                //     if (this.point.tes) {
-                //         tooltip += '<a target="_blank" href="{this.point.tes}">go</a>';
-                //     }
-                //
-                //     return tooltip;
-                // },
             },
 
             series: concurrencySeries,
