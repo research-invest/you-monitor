@@ -112,7 +112,9 @@ SQL;
     public function getAverageRatingSeries(): array
     {
         $data = array_column($this->averageRatingData, 'avg_average_rating');
-        $data = array_map(function($v) { return round($v, 2); }, $data);
+        $data = array_map(function ($v) {
+            return round($v, 2);
+        }, $data);
 
         return [
             [
@@ -124,6 +126,6 @@ SQL;
 
     public function getAverageRatingCategories(): array
     {
-      return array_column($this->averageRatingData, 'day_time');
+        return array_column($this->averageRatingData, 'day_time');
     }
 }
