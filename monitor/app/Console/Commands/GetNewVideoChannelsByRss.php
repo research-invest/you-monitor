@@ -45,7 +45,9 @@ class GetNewVideoChannelsByRss extends Command
      */
     public function handle()
     {
-        $channels = Channel::orderBy('id')->get();
+        $channels = Channel::where('status', Channel::STATUS_ACTIVE)
+            ->orderBy('id')
+            ->get();
 
         /**
          * @var Channel $channel
