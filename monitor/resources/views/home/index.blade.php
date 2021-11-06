@@ -31,6 +31,7 @@
                 <th scope="col">Канал</th>
                 <th scope="col">Видео</th>
                 <th scope="col">Просмотров</th>
+                <th scope="col">Длительность</th>
             </tr>
             </thead>
             <tbody>
@@ -46,6 +47,7 @@
                         <a target="_blank" href="{{ $top->video_url }}">{{ $top->video_title }}</a>
                     </td>
                     <td>{{ number_format($top->max_views, 0, ',', ' ') }}</td>
+                    <td>{{ gmdate("i:s", $top->length_seconds) }}</td>
                 </tr>
             @endforeach
             </tbody>
