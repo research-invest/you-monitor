@@ -56,7 +56,7 @@
                                 Действия
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                                <li><a class="dropdown-item" href="{{ route('video_show', ['id' => $top->video_id]) }}">Статистика
+                                <li><a target="_blank" class="dropdown-item" href="{{ route('video_show', ['id' => $top->video_id]) }}">Статистика
                                         видео</a></li>
                             </ul>
                         </div>

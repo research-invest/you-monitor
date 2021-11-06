@@ -13,3 +13,5 @@ get-new-video-channels-by-rss:
 	docker-compose exec monitor-php php artisan get-new-video-channels-by-rss:run
 get-video-info:
 	docker-compose exec monitor-php php artisan get-video-info:run
+gophp:
+	docker-compose exec monitor-php bash

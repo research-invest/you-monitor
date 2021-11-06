@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class Video extends Model
 {
@@ -38,12 +39,12 @@ class Video extends Model
 
     public function getImagePath(): string
     {
-        return $this->channel_id . '/' . $this->video_id . '.jpg';
+        return $this->channel->channel_id . '/' . $this->video_id . '.jpg';
     }
 
     public function getThumbnail(): string
     {
-        return '/'.VideoPreview::DISK_NAME . '/' . $this->getImagePath(); //@todo переделать
+        return Storage::disk(VideoPreview::DISK_NAME)->url($this->getImagePath());
     }
 
 
