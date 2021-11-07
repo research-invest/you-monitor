@@ -18,6 +18,23 @@
         @endif
     </div>
 
+    <div class="card mb-3" style="max-width: 540px;">
+        <div class="row g-0">
+            <div class="col-md-4">
+                <img src="{{$video->getThumbnail()}}" class="img-fluid rounded-start" alt="">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title">{{$video->title}}</h5>
+                    <p class="card-text"></p>
+                    {{--                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>--}}
+                    <a target="_blank" href="{{$video->url}}" class="btn btn-sm btn-primary">Открыть видео</a>
+                    <a target="_blank" href="{{$video->channel->url}}" class="btn btn-sm btn-primary">Открыть канал</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <h2>Просмотры</h2>
     <figure class="highcharts-figure">
         <div id="container-views"></div>
@@ -32,23 +49,6 @@
     <figure class="highcharts-figure">
         <div id="container-average-rating"></div>
     </figure>
-
-    <div class="card mb-3" style="max-width: 540px;">
-        <div class="row g-0">
-            <div class="col-md-4">
-                <img src="{{$video->getThumbnail()}}" class="img-fluid rounded-start" alt="">
-            </div>
-            <div class="col-md-8">
-                <div class="card-body">
-                    <h5 class="card-title">{{$video->title}}</h5>
-                    <p class="card-text"></p>
-{{--                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>--}}
-                    <a target="_blank" href="{{$video->url}}" class="btn btn-sm btn-primary">Открыть видео</a>
-                    <a target="_blank" href="{{$video->channel->url}}" class="btn btn-sm btn-primary">Открыть канал</a>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <script type="text/javascript">
 
