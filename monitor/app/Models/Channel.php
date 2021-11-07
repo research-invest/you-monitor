@@ -25,4 +25,10 @@ class Channel extends Model
         'created_at',
         'status',
     ];
+
+
+    public function videos()
+    {
+        return $this->hasMany(Video::class);
+    }
 }

@@ -1,4 +1,5 @@
 @extends('layouts.main')
+@section('title', $video->title)
 @section('content')
     <div
         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
@@ -26,7 +27,6 @@
     <figure class="highcharts-figure">
         <div id="container-like-dislike"></div>
     </figure>
-
 
     <h2>Средний рейтинг</h2>
     <figure class="highcharts-figure">

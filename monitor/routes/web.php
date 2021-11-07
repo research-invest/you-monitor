@@ -3,6 +3,7 @@
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\VideoController;
+use \App\Http\Controllers\ChannelController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,3 +23,11 @@ Route::get('/', [HomeController::class, 'index'])
 Route::get('/video/show/{id}', [VideoController::class, 'show'])
     ->where(['id' => '[0-9]+'])
     ->name('video_show');
+
+Route::get('/channels', [ChannelController::class, 'index'])
+    ->name('channels');
+
+Route::get('/channel/show/{id}', [ChannelController::class, 'show'])
+    ->where(['id' => '[0-9]+'])
+    ->name('channel_show');
+
