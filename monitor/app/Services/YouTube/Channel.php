@@ -22,6 +22,12 @@ class Channel
      */
     public $url;
 
+
+    /**
+     * @var string
+     */
+    public $published;
+
     /**
      * The videos available on the channel (form the RSS feed)
      *

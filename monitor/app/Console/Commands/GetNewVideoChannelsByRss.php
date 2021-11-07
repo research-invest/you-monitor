@@ -68,6 +68,7 @@ class GetNewVideoChannelsByRss extends Command
             $rssFeed = $this->getRssFeed($channelId);
 
             $channel->title = $channel->title ?: $rssFeed->channel()->name;
+            $channel->published_at = $channel->published_at ?: $rssFeed->channel()->published;
 
             if ($channel->isDirty()) {
                 $channel->save();

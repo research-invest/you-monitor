@@ -117,6 +117,7 @@ class RssFeed
     {
         $this->channel->name = (string)$this->xml->author->name;
         $this->channel->url = (string)$this->xml->author->uri;
+        $this->channel->published = (string)$this->xml->published;
     }
 
     /**

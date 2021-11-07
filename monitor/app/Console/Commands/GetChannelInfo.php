@@ -75,6 +75,9 @@ class GetChannelInfo extends Command
                 ]);
 
             $history->save();
+
+            $channel->views = $history->views;
+            $channel->save();
         }
     }
 
