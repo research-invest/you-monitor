@@ -29,7 +29,7 @@
                         {{ $channel->published_at }}
                     </td>
                     <td>
-                        {{ $channel->count_views }}
+                        {{ number_format($channel->count_views, 0, ',', ' ') }}
                     </td>
                     <td>
                         <div class="btn-group" role="group">
