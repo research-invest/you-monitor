@@ -26,7 +26,7 @@
             <div class="col-md-8">
                 <div class="card-body">
                     <h5 class="card-title">{{$video->title}}</h5>
-                    <p class="card-text"></p>
+                    <p class="card-text">Длительность: {{gmdate("i:s", $video->length_seconds) }} сек.</p>
                     {{--                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>--}}
                     <a target="_blank" href="{{$video->url}}" class="btn btn-sm btn-primary">Открыть видео</a>
                     <a target="_blank" href="{{$video->channel->url}}" class="btn btn-sm btn-primary">Открыть канал</a>

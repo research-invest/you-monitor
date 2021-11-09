@@ -29,7 +29,7 @@ class ChannelController extends Controller
 
         return view('channel.show', [
             'channel' => $channelData,
-            'videos' => $channelData->videos,
+            'videos' => $channelData->videos()->orderBy('published_at', 'DESC')->get(),
         ]);
     }
 

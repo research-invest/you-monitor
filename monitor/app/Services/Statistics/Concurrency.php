@@ -85,11 +85,13 @@ SQL;
         }
 
         foreach ($this->drilldown as $data) {
-            $dataVideoSeries[$data->channel_id][$data->video_id] = [
-                'title' => $data->video_title,
-                'max_views' => $data->max_views,
-                'percent_max_views' => round(($data->max_views / $sumChannelsViews[$data->channel_id]) * 100, 2),
-            ];
+            if (empty($dataVideoSeries[$data->channel_id]) || count($dataVideoSeries[$data->channel_id]) <= 14) {
+                $dataVideoSeries[$data->channel_id][$data->video_id] = [
+                    'title' => $data->video_title,
+                    'max_views' => $data->max_views,
+                    'percent_max_views' => round(($data->max_views / $sumChannelsViews[$data->channel_id]) * 100, 2),
+                ];
+            }
         }
 
         foreach ($this->drilldown as $channel) {

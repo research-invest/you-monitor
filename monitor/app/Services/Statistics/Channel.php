@@ -13,9 +13,9 @@ class Channel
         $this->channelId = $id;
     }
 
-    public function getListChannels()
+    public function getListChannels(): \Illuminate\Database\Eloquent\Collection|array
     {
-        return ModelChannel::all();
+        return ModelChannel::query()->orderBy('count_views', 'DESC')->get();
     }
 
     public function getById()
