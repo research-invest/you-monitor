@@ -29,16 +29,16 @@ class Channel
     {
         $sql = <<<SQL
 SELECT
-       COUNT(v.id) filter (where v.length_seconds < 40) AS Меньше_40,
-       COUNT(v.id) filter (where v.length_seconds >= 40 AND v.length_seconds < 50) AS Меньше_50,
-       COUNT(v.id) filter (where v.length_seconds >= 50 AND v.length_seconds < 60) AS Меньше_60,
-       COUNT(v.id) filter (where v.length_seconds >= 60 AND v.length_seconds < 70) AS Меньше_70,
-       COUNT(v.id) filter (where v.length_seconds >= 70 AND v.length_seconds < 80) AS Меньше_80,
-       COUNT(v.id) filter (where v.length_seconds >= 80 AND v.length_seconds < 90) AS Меньше_90,
-       COUNT(v.id) filter (where v.length_seconds >= 90 AND v.length_seconds < 100) AS Меньше_100,
-       COUNT(v.id) filter (where v.length_seconds >= 100 AND v.length_seconds < 110) AS Меньше_110,
-       COUNT(v.id) filter (where v.length_seconds >= 110 AND v.length_seconds < 120) AS Меньше_120,
-       COUNT(v.id) filter (where v.length_seconds >= 120 AND v.length_seconds < 180) AS Меньше_180,
+       COUNT(v.id) filter (where v.length_seconds < 40) AS До_39,
+       COUNT(v.id) filter (where v.length_seconds >= 40 AND v.length_seconds < 50) AS От_40_49,
+       COUNT(v.id) filter (where v.length_seconds >= 50 AND v.length_seconds < 60) AS От_50_59,
+       COUNT(v.id) filter (where v.length_seconds >= 60 AND v.length_seconds < 70) AS От_60_69,
+       COUNT(v.id) filter (where v.length_seconds >= 70 AND v.length_seconds < 80) AS От_70_79,
+       COUNT(v.id) filter (where v.length_seconds >= 80 AND v.length_seconds < 90) AS От_80_89,
+       COUNT(v.id) filter (where v.length_seconds >= 90 AND v.length_seconds < 100) AS От_80_89,
+       COUNT(v.id) filter (where v.length_seconds >= 100 AND v.length_seconds < 110) AS От_100_109,
+       COUNT(v.id) filter (where v.length_seconds >= 110 AND v.length_seconds < 120) AS От_110_119,
+       COUNT(v.id) filter (where v.length_seconds >= 120 AND v.length_seconds < 180) AS От_120_179,
        COUNT(v.id) filter (where v.length_seconds >= 180) AS Больше_180
 FROM videos AS v
 WHERE v.status = :video_status;
