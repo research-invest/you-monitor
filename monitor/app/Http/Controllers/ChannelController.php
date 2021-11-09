@@ -9,8 +9,6 @@ class ChannelController extends Controller
 
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
-     * @var $page string|null
-     *
      */
     public function index()
     {
@@ -18,6 +16,18 @@ class ChannelController extends Controller
 
         return view('channel.index', [
             'channels' => $channel->getListChannels(),
+        ]);
+    }
+
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+    public function statistics()
+    {
+        $channel = new Channel();
+
+        return view('channel.statistics', [
+            'lengthVideos' => $channel->getLengthVideosStat(),
         ]);
     }
 

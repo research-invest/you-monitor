@@ -68,6 +68,10 @@
                             <span data-feather="file"></span>
                             Каналы
                         </a>
+                        <a class="nav-link" href="{{ route('channels_statistics') }}">
+                            <span data-feather="file"></span>
+                            Статистика каналов
+                        </a>
                     </li>
 {{--                    <li class="nav-item">--}}
 {{--                        <a class="nav-link" href="#">--}}
