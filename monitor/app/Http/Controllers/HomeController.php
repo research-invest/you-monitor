@@ -23,7 +23,9 @@ class HomeController extends Controller
                 'series' => $concurrency->getSeries(),
                 'drilldown' => $concurrency->getDrilldown(),
             ],
-            'top50' => $top50->getTop50()
+            'top50' => $top50->getTop50(),
+            'top24h' => $top50->getTop24h(),
+            'newVideos' => $top50->getNewVideos(),
         ]);
     }
 }

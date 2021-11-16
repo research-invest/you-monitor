@@ -28,6 +28,7 @@ class ChannelController extends Controller
 
         return view('channel.statistics', [
             'lengthVideos' => $channel->getLengthVideosStat(),
+            'topLengthVideos' => $channel->getTopLengthVideosStat(),
         ]);
     }
 

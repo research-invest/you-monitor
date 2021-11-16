@@ -26,7 +26,8 @@ INNER JOIN history_data_channels AS h ON c.id = h.channel_id
 INNER JOIN videos AS v ON v.channel_id = h.channel_id AND v.status = :video_status
 WHERE c.status = :channel_status
 GROUP BY c.id, c.title
-ORDER BY max_views DESC;
+ORDER BY max_views DESC
+LIMIT 7;
 SQL;
 
         $this->channels = DB::select($sql, [

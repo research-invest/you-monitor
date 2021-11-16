@@ -22,54 +22,167 @@
         {{--            feature in Highcharts to easily switch between datasets.--}}
         {{--        </p>--}}
     </figure>
-    <h2>Популярные видео</h2>
-    <div class="table-responsive">
-        <table class="table table-striped table-sm">
-            <thead>
-            <tr>
-                <th scope="col">Опубликован</th>
-                <th scope="col">Канал</th>
-                <th scope="col">Видео</th>
-                <th scope="col">Просмотров</th>
-                <th scope="col">Длительность</th>
-                <th scope="col">Рейтинг</th>
-                <th scope="col">Действия</th>
-            </tr>
-            </thead>
-            <tbody>
-            @foreach ($top50 as $top)
-                <tr data-id=" {{ $top->video_id }}">
-                    <td>
-                        {{ $top->video_published_at }}
-                    </td>
-                    <td>
-                        <a target="_blank" href="{{ $top->channel_url }}">{{ $top->channel_title }}</a>
-                    </td>
-                    <td>
-                        <a target="_blank" href="{{ $top->video_url }}">{{ $top->video_title }}</a>
-                    </td>
-                    <td>{{ number_format($top->max_views, 0, ',', ' ') }}</td>
-                    <td>{{ gmdate("i:s", $top->length_seconds) }}</td>
-                    <td>{{ $top->average_rating}}</td>
-                    <td>
-                        <div class="btn-group" role="group">
-                            <button id="btnGroupDrop1" type="button" class="btn btn-primary btn-sm dropdown-toggle"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                Действия
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                                <li><a target="_blank" class="dropdown-item" href="{{ route('video_show', ['id' => $top->video_id]) }}">Статистика
-                                        видео</a></li>
-                                <li><a target="_blank" class="dropdown-item" href="{{ route('channel_show', ['id' => $top->channel_id]) }}">Статистика
-                                        канала</a></li>
-                            </ul>
-                        </div>
-                    </td>
-                </tr>
-            @endforeach
-            </tbody>
-        </table>
+
+
+    <nav>
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+            <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">За 24ч</button>
+            <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Топ 50</button>
+            <button class="nav-link" id="nav-video-log-tab" data-bs-toggle="tab" data-bs-target="#nav-video-log" type="button" role="tab" aria-controls="nav-video-log" aria-selected="false">Новые видео</button>
+        </div>
+    </nav>
+    <div class="tab-content" id="nav-tabContent">
+        <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+            <div class="table-responsive">
+                <table class="table table-striped table-sm">
+                    <thead>
+                    <tr>
+                        <th scope="col">Опубликован</th>
+                        <th scope="col">Канал</th>
+                        <th scope="col">Видео</th>
+                        <th scope="col">Просмотров</th>
+                        <th scope="col">Длительность</th>
+                        <th scope="col">Рейтинг</th>
+                        <th scope="col">Действия</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach ($top24h as $top)
+                        <tr data-id=" {{ $top->video_id }}">
+                            <td>
+                                {{ $top->video_published_at }}
+                            </td>
+                            <td>
+                                <a href="{{ route('channel_show', ['id' => $top->channel_id]) }}">{{ $top->channel_title }}</a>
+                            </td>
+                            <td>
+                                <a href="{{ route('video_show', ['id' => $top->video_id]) }}">{{ $top->video_title }}</a>
+                            </td>
+                            <td>{{ number_format($top->max_views, 0, ',', ' ') }}</td>
+                            <td>{{ gmdate("i:s", $top->length_seconds) }}</td>
+                            <td>{{ $top->average_rating}}</td>
+                            <td>
+                                <div class="btn-group" role="group">
+                                    <button id="btnGroupDrop1" type="button" class="btn btn-primary btn-sm dropdown-toggle"
+                                            data-bs-toggle="dropdown" aria-expanded="false">
+                                        Действия
+                                    </button>
+                                    <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                        <li><a target="_blank" class="dropdown-item" href="{{ route('video_show', ['id' => $top->video_id]) }}">Статистика
+                                                видео</a></li>
+                                        <li><a target="_blank" class="dropdown-item" href="{{ route('channel_show', ['id' => $top->channel_id]) }}">Статистика
+                                                канала</a></li>
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+            <div class="table-responsive">
+                <table class="table table-striped table-sm">
+                    <thead>
+                    <tr>
+                        <th scope="col">Опубликован</th>
+                        <th scope="col">Канал</th>
+                        <th scope="col">Видео</th>
+                        <th scope="col">Просмотров</th>
+                        <th scope="col">Длительность</th>
+                        <th scope="col">Рейтинг</th>
+                        <th scope="col">Действия</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach ($top50 as $top)
+                        <tr data-id=" {{ $top->video_id }}">
+                            <td>
+                                {{ $top->video_published_at }}
+                            </td>
+                            <td>
+                                <a href="{{ route('channel_show', ['id' => $top->channel_id]) }}">{{ $top->channel_title }}</a>
+                            </td>
+                            <td>
+                                <a href="{{ route('video_show', ['id' => $top->video_id]) }}">{{ $top->video_title }}</a>
+                            </td>
+                            <td>{{ number_format($top->max_views, 0, ',', ' ') }}</td>
+                            <td>{{ gmdate("i:s", $top->length_seconds) }}</td>
+                            <td>{{ $top->average_rating}}</td>
+                            <td>
+                                <div class="btn-group" role="group">
+                                    <button id="btnGroupDrop1" type="button" class="btn btn-primary btn-sm dropdown-toggle"
+                                            data-bs-toggle="dropdown" aria-expanded="false">
+                                        Действия
+                                    </button>
+                                    <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                        <li><a target="_blank" class="dropdown-item" href="{{ route('video_show', ['id' => $top->video_id]) }}">Статистика
+                                                видео</a></li>
+                                        <li><a target="_blank" class="dropdown-item" href="{{ route('channel_show', ['id' => $top->channel_id]) }}">Статистика
+                                                канала</a></li>
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="nav-video-log" role="tabpanel" aria-labelledby="nav-video-log-tab">
+            <div class="table-responsive">
+                <table class="table table-striped table-sm">
+                    <thead>
+                    <tr>
+                        <th scope="col">Опубликован</th>
+                        <th scope="col">Канал</th>
+                        <th scope="col">Видео</th>
+                        <th scope="col">Просмотров</th>
+                        <th scope="col">Длительность</th>
+                        <th scope="col">Рейтинг</th>
+                        <th scope="col">Действия</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach ($newVideos as $video)
+                        <tr data-id=" {{ $video->video_id }}">
+                            <td>
+                                {{ $video->video_published_at }}
+                            </td>
+                            <td>
+                                <a href="{{ route('channel_show', ['id' => $video->channel_id]) }}">{{ $video->channel_title }}</a>
+                            </td>
+                            <td>
+                                <a href="{{ route('video_show', ['id' => $video->video_id]) }}">{{ $video->video_title }}</a>
+                            </td>
+                            <td>{{ number_format($video->max_views, 0, ',', ' ') }}</td>
+                            <td>{{ gmdate("i:s", $video->length_seconds) }}</td>
+                            <td>{{ $video->average_rating}}</td>
+                            <td>
+                                <div class="btn-group" role="group">
+                                    <button id="btnGroupDrop1" type="button" class="btn btn-primary btn-sm dropdown-toggle"
+                                            data-bs-toggle="dropdown" aria-expanded="false">
+                                        Действия
+                                    </button>
+                                    <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                        <li><a target="_blank" class="dropdown-item" href="{{ route('video_show', ['id' => $video->video_id]) }}">Статистика
+                                                видео</a></li>
+                                        <li><a target="_blank" class="dropdown-item" href="{{ route('channel_show', ['id' => $video->channel_id]) }}">Статистика
+                                                канала</a></li>
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
+
+
+
 
     <script type="text/javascript">
         let concurrencySeries = <?= json_encode($concurrency['series'])?>;
