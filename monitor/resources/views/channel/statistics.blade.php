@@ -61,7 +61,7 @@
                 type: 'pie'
             },
             title: {
-                text: 'Длительность видео у 5 топовых каналов'
+                text: 'Длительность видео у 3 топовых каналов'
             },
             tooltip: {
                 pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'

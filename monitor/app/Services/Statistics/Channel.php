@@ -80,7 +80,7 @@ SELECT
        COUNT(v.id) filter (where v.length_seconds >= 120 AND v.length_seconds < 180) AS От_120_179,
        COUNT(v.id) filter (where v.length_seconds >= 180) AS Больше_180
 FROM videos AS v
-WHERE v.status = :video_status AND v.channel_id IN (SELECT id FROM channels ORDER BY views DESC LIMIT 5);
+WHERE v.status = :video_status AND v.channel_id IN (SELECT id FROM channels ORDER BY views DESC LIMIT 3);
 SQL;
 
         $data = (array)DB::selectOne($sql, [
