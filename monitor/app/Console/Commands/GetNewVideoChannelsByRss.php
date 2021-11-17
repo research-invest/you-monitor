@@ -6,6 +6,7 @@ use App\Helpers\FileHelper;
 use App\Models\Channel;
 use App\Models\Video;
 use App\Models\VideoPreview;
+use App\Notifications\NewVideo;
 use App\Services\YouTube\RssFeed;
 use Illuminate\Support\Facades\Storage;
 
@@ -53,7 +54,7 @@ class GetNewVideoChannelsByRss extends Command
          * @var Channel $channel
          */
         foreach ($channels as $channel) {
-            $channelId = $channel->channel_id;
+            $channelId = $isChannelId = $channel->channel_id;
 
             if (!$channelId) {
                 $channelId = $this->getExternalId($channel->url);
@@ -104,6 +105,10 @@ class GetNewVideoChannelsByRss extends Command
                         'thumbnail_url' => $thumbnail,
                         'hash' => FileHelper::hashFile($thumbnailPath),
                     ]);
+                }
+
+                if ($isChannelId) {
+                    $data->notify(new NewVideo());
                 }
             }
 

@@ -7,6 +7,7 @@ namespace App\Console;
 use App\Console\Commands\GetNewVideoChannelsByRss;
 use App\Console\Commands\GetVideoInfo;
 use App\Console\Commands\GetChannelInfo;
+use App\Console\Commands\Misc;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -21,6 +22,7 @@ class Kernel extends ConsoleKernel
         GetNewVideoChannelsByRss::class,
         GetVideoInfo::class,
         GetChannelInfo::class,
+        Misc::class,
     ];
 
     /**
@@ -31,7 +33,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command(GetNewVideoChannelsByRss::class)->hourly();
+        $schedule->command(GetNewVideoChannelsByRss::class)->everyThirtyMinutes();
         $schedule->command(GetVideoInfo::class)->everyThirtyMinutes();
         $schedule->command(GetChannelInfo::class)->everyTwoHours();
     }

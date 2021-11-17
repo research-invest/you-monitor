@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "11e9b2b70a123411703707ba50e47c9d",
+    "content-hash": "da19f96e327f5dd58e2bd4d0c737cb94",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -961,6 +961,72 @@
                 }
             ],
             "time": "2021-10-06T17:43:30+00:00"
+        },
+        {
+            "name": "laravel-notification-channels/telegram",
+            "version": "0.8.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel-notification-channels/telegram.git",
+                "reference": "dd7cee42b1da9a5528abd298a93c309e25a8306f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel-notification-channels/telegram/zipball/dd7cee42b1da9a5528abd298a93c309e25a8306f",
+                "reference": "dd7cee42b1da9a5528abd298a93c309e25a8306f",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "guzzlehttp/guzzle": "^6.2 || ^7.0",
+                "illuminate/contracts": "^5.5 || ^6.0 || ^7.0 || ^8.0",
+                "illuminate/notifications": "^5.5 || ^6.0 || ^7.0 || ^8.0",
+                "illuminate/support": "^5.5 || ^6.0 || ^7.0 || ^8.0",
+                "php": "^7.2 || ^8.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.3",
+                "phpunit/phpunit": "^7.0 || ^8.5.21 || ^9.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "NotificationChannels\\Telegram\\TelegramServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "NotificationChannels\\Telegram\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Irfaq Syed",
+                    "email": "syed@lukonet.com",
+                    "homepage": "https://lukonet.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Telegram Notifications Channel for Laravel",
+            "homepage": "https://github.com/laravel-notification-channels/telegram",
+            "keywords": [
+                "laravel",
+                "notification",
+                "telegram",
+                "telegram notification",
+                "telegram notifications channel"
+            ],
+            "support": {
+                "issues": "https://github.com/laravel-notification-channels/telegram/issues",
+                "source": "https://github.com/laravel-notification-channels/telegram/tree/0.8.0"
+            },
+            "time": "2021-11-14T01:06:40+00:00"
         },
         {
             "name": "laravel/framework",
@@ -2851,77 +2917,6 @@
                 }
             ],
             "time": "2021-09-25T23:10:38+00:00"
-        },
-        {
-            "name": "simplepie/simplepie",
-            "version": "1.5.6",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/simplepie/simplepie.git",
-                "reference": "1c68e14ca3ac84346b6e6fe3c5eedf725d0f92c6"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/simplepie/simplepie/zipball/1c68e14ca3ac84346b6e6fe3c5eedf725d0f92c6",
-                "reference": "1c68e14ca3ac84346b6e6fe3c5eedf725d0f92c6",
-                "shasum": ""
-            },
-            "require": {
-                "ext-pcre": "*",
-                "ext-xml": "*",
-                "ext-xmlreader": "*",
-                "php": ">=5.6.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "~5.4.3 || ~6.5"
-            },
-            "suggest": {
-                "ext-curl": "",
-                "ext-iconv": "",
-                "ext-intl": "",
-                "ext-mbstring": "",
-                "mf2/mf2": "Microformat module that allows for parsing HTML for microformats"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "SimplePie": "library"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Ryan Parman",
-                    "homepage": "http://ryanparman.com/",
-                    "role": "Creator, alumnus developer"
-                },
-                {
-                    "name": "Sam Sneddon",
-                    "homepage": "https://gsnedders.com/",
-                    "role": "Alumnus developer"
-                },
-                {
-                    "name": "Ryan McCue",
-                    "email": "me@ryanmccue.info",
-                    "homepage": "http://ryanmccue.info/",
-                    "role": "Developer"
-                }
-            ],
-            "description": "A simple Atom/RSS parsing library for PHP",
-            "homepage": "http://simplepie.org/",
-            "keywords": [
-                "atom",
-                "feeds",
-                "rss"
-            ],
-            "support": {
-                "issues": "https://github.com/simplepie/simplepie/issues",
-                "source": "https://github.com/simplepie/simplepie/tree/1.5.6"
-            },
-            "time": "2020-10-14T07:17:22+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -5305,67 +5300,6 @@
                 "source": "https://github.com/tijsverkoyen/CssToInlineStyles/tree/2.2.3"
             },
             "time": "2020-07-13T06:12:54+00:00"
-        },
-        {
-            "name": "vedmant/laravel-feed-reader",
-            "version": "1.5.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/vedmant/laravel-feed-reader.git",
-                "reference": "dd2031d9d6d86c5f0cf4a6b0435802ed27c38b79"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/vedmant/laravel-feed-reader/zipball/dd2031d9d6d86c5f0cf4a6b0435802ed27c38b79",
-                "reference": "dd2031d9d6d86c5f0cf4a6b0435802ed27c38b79",
-                "shasum": ""
-            },
-            "require": {
-                "ext-curl": "*",
-                "illuminate/support": "~5.5.0|~5.6.0|~5.7.0|~5.8.0|^6.0|^7.0|^8.0",
-                "php": ">=5.6.0",
-                "simplepie/simplepie": "^1.5"
-            },
-            "require-dev": {
-                "orchestra/testbench": "^5.0",
-                "phpunit/phpunit": "^8.4"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Vedmant\\FeedReader\\FeedReaderServiceProvider"
-                    ],
-                    "aliases": {
-                        "FeedReader": "Vedmant\\FeedReader\\Facades\\FeedReader"
-                    }
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Vedmant\\FeedReader\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Vedmant",
-                    "email": "vedmant@gmail.com"
-                },
-                {
-                    "name": "Andrew Judd",
-                    "email": "contact@andrewjudd.ca"
-                }
-            ],
-            "description": "A simple RSS feed reader for Laravel 5|6",
-            "support": {
-                "issues": "https://github.com/vedmant/laravel-feed-reader/issues",
-                "source": "https://github.com/vedmant/laravel-feed-reader/tree/1.5.1"
-            },
-            "time": "2021-05-28T16:12:16+00:00"
         },
         {
             "name": "vlucas/phpdotenv",

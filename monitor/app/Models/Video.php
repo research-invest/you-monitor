@@ -4,11 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Storage;
 
 class Video extends Model
 {
     use HasFactory;
+    use Notifiable;
 
     const STATUS_ACTIVE = 1;
     const STATUS_DELETED = 2;
