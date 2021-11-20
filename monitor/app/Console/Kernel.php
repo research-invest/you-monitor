@@ -35,7 +35,7 @@ class Kernel extends ConsoleKernel
     {
         $schedule->command(GetNewVideoChannelsByRss::class)->everyTenMinutes();
         $schedule->command(GetVideoInfo::class)->everyThirtyMinutes();
-        $schedule->command(GetChannelInfo::class)->everyTwoHours();
+        $schedule->command(GetChannelInfo::class)->everySixHours();
     }
 
     /**

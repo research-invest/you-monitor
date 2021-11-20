@@ -51,8 +51,8 @@ class GetVideoInfo extends Command
         $videos = Video::query()
             ->select('videos.*')
             ->join('channels AS ch', 'videos.channel_id', '=', 'ch.id')
-            ->where('videos.status', Video::STATUS_ACTIVE)
-            ->where('ch.status', Channel::STATUS_ACTIVE)
+            ->where('videos.status', '=', Video::STATUS_ACTIVE)
+            ->where('ch.status', '=',Channel::STATUS_ACTIVE)
             ->orderBy('videos.id', 'DESC')
             ->get();
 
