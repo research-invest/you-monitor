@@ -33,7 +33,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command(GetNewVideoChannelsByRss::class)->everyThirtyMinutes();
+        $schedule->command(GetNewVideoChannelsByRss::class)->everyTenMinutes();
         $schedule->command(GetVideoInfo::class)->everyThirtyMinutes();
         $schedule->command(GetChannelInfo::class)->everyTwoHours();
     }

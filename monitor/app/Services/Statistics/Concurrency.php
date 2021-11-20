@@ -87,10 +87,12 @@ SQL;
 
         foreach ($this->drilldown as $data) {
             if (empty($dataVideoSeries[$data->channel_id]) || count($dataVideoSeries[$data->channel_id]) <= 14) {
+                $sumChannelViews = $sumChannelsViews[$data->channel_id];
+
                 $dataVideoSeries[$data->channel_id][$data->video_id] = [
                     'title' => $data->video_title,
                     'max_views' => $data->max_views,
-                    'percent_max_views' => round(($data->max_views / $sumChannelsViews[$data->channel_id]) * 100, 2),
+                    'percent_max_views' => $sumChannelViews ? round(($data->max_views / $sumChannelViews) * 100, 2) : 0,
                 ];
             }
         }
