@@ -3,8 +3,10 @@
 namespace App\Console\Commands;
 
 use App\Helpers\FileHelper;
+use App\Helpers\MathHelper;
 use App\Helpers\StringHelper;
 use App\Models\ChangeLog;
+use App\Models\Channel;
 use App\Models\HistoryDataVideo;
 use App\Models\Video;
 use App\Models\VideoPreview;
@@ -46,9 +48,12 @@ class GetVideoInfo extends Command
      */
     public function handle()
     {
-        $videos = Video::where('status', Video::STATUS_ACTIVE)
-            ->with('channel')
-            ->orderBy('id')
+        $videos = Video::query()
+            ->select('videos.*')
+            ->join('channels AS ch', 'videos.channel_id', '=', 'ch.id')
+            ->where('videos.status', Video::STATUS_ACTIVE)
+            ->where('ch.status', Channel::STATUS_ACTIVE)
+            ->orderBy('videos.id', 'DESC')
             ->get();
 
         /**
@@ -77,14 +82,23 @@ class GetVideoInfo extends Command
                 $video->save();
             }
 
+            $lastHistory = HistoryDataVideo::query()
+                ->select('views')
+                ->where('video_id', $video->id)
+                ->orderBy('id', 'DESC')
+                ->first();
+
+            $views = $data['views'] ?? 0;
+
             $history->setRawAttributes(
                 [
                     'video_id' => $video->id,
                     'channel_id' => $video->channel_id,
-                    'views' => $data['views'] ?? 0,
+                    'views' => $views,
                     'likes' => $data['likes'] ?? 0,
                     'dis_likes' => $data['dis_likes'] ?? 0,
                     'average_rating' => $data['average_rating'] ?? 0,
+                    'delta' => MathHelper::getPercentageChange($lastHistory ? $lastHistory->views : 0, $views),
                 ]);
 
             $history->save();
@@ -149,7 +163,7 @@ class GetVideoInfo extends Command
             strpos($content, '"playerConfig":{') - strpos($content, '"videoDetails":{'),
         );
 
-        $getLikes = function ($s)  {
+        $getLikes = function ($s) {
             preg_match('/({"accessibilityData")?:\"(\d.+)"/U', $s, $likes);
             return count($likes) === 3 ? StringHelper::toInt(str_replace([' ', ':', '"', '\\'], '', $likes[0])) : 0;
         };

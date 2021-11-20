@@ -2,10 +2,9 @@
 
 namespace App\Console\Commands;
 
+use App\Helpers\MathHelper;
 use App\Models\Video;
 use App\Notifications\NewVideo;
-use Illuminate\Database\Eloquent\Model;
-use NotificationChannels\Telegram\TelegramMessage;
 
 /**
  * php artisan misc:run
@@ -43,7 +42,8 @@ class Misc extends Command
      */
     public function handle()
     {
-        $this->testTelegram();
+//        $this->testTelegram();
+        $this->testDelta();
     }
 
     private function testTelegram()
@@ -53,6 +53,65 @@ class Misc extends Command
             'url' => "Welcome to the application " . $video->title . "!"
         ]));
 
+    }
+
+    private function testDelta()
+    {
+        $tests = [
+            [
+                'old' => 0,
+                'new' => 0,
+                'result' => 0
+            ],
+            [
+                'old' => 100,
+                'new' => 120,
+                'result' => 20
+            ],
+            [
+                'old' => 120,
+                'new' => 100,
+                'result' => -20
+            ],
+            [
+                'old' => 1,
+                'new' => 120,
+                'result' => 11900
+            ],
+            [
+                'old' => 120,
+                'new' => 1,
+                'result' => -11900
+            ],
+            [
+                'old' => 100,
+                'new' => 1200,
+                'result' => 1100
+            ], // 5
+            [
+                'old' => 100,
+                'new' => 0,
+                'result' => -100
+            ],
+            [
+                'old' => 0,
+                'new' => 100,
+                'result' => 100
+            ],
+        ];
+
+        foreach ($tests as $num => $test) {
+            $percent = MathHelper::getPercentageChange($test['old'], $test['new']);
+
+            if ($percent != $test['result']) {
+                var_dump([
+                    $num,
+                    $percent,
+                    $test['result']
+                ]);
+            }
+
+        }
     }
 
 }

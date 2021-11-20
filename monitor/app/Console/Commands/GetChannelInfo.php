@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Helpers\MathHelper;
 use App\Helpers\StringHelper;
 use App\Models\ChangeLog;
 use App\Models\Channel;
@@ -68,10 +69,20 @@ class GetChannelInfo extends Command
                 continue;
             }
 
+            $lastHistory = HistoryDataChannel::query()
+                ->select('views')
+                ->where('channel_id', $channel->id)
+                ->orderBy('id', 'DESC')
+                ->first();
+
+            $views = $data['views'] ?? 0;
+
             $history->setRawAttributes(
                 [
                     'channel_id' => $channel->id,
-                    'views' => $data['views'] ?? 0,
+                    'views' => $views,
+                    'delta' =>
+                        MathHelper::getPercentageChange($lastHistory ? $lastHistory->views : 0, $views),
                 ]);
 
             $history->save();

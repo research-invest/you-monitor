@@ -17,5 +17,6 @@ class HistoryDataVideo extends Model
         'views',
         'likes',
         'dis_likes',
+        'delta',
     ];
 }

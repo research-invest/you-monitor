@@ -14,5 +14,6 @@ class HistoryDataChannel extends Model
     protected $fillable = [
         'channel_id',
         'views',
+        'delta',
     ];
 }
