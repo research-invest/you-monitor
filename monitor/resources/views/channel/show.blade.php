@@ -3,7 +3,7 @@
 @section('content')
     <h2>{{$channel->title}}</h2>
     <a target="_blank" href="{{$channel->url}}" class="btn btn-sm btn-primary">Открыть канал</a>
-
+    <a href="{{ route('channels_schedule', ['id' => $channel->id]) }}" class="btn btn-sm btn-primary">Расписание выходов роликов</a>
     <h2>Видео</h2>
     <div class="table-responsive">
         <table class="table table-striped table-sm">

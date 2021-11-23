@@ -58,10 +58,10 @@ SQL;
         }
 
         return [[
-                'name' => 'Длина видео',
-                'colorByPoint' => true,
-                'data' => $dataSeries
-            ]];
+            'name' => 'Длина видео',
+            'colorByPoint' => true,
+            'data' => $dataSeries
+        ]];
     }
 
     public function getTopLengthVideosStat(): array
@@ -97,9 +97,58 @@ SQL;
         }
 
         return [[
-                'name' => 'Длина видео',
-                'colorByPoint' => true,
-                'data' => $dataSeries
-            ]];
+            'name' => 'Длина видео',
+            'colorByPoint' => true,
+            'data' => $dataSeries
+        ]];
+    }
+
+    private function weekOfMonth($date)
+    {
+        // estract date parts
+        list($y, $m, $d) = explode('-', date('Y-m-d', strtotime($date)));
+
+        // current week, min 1
+        $w = 1;
+
+        // for each day since the start of the month
+        for ($i = 1; $i < $d; ++$i) {
+            // if that day was a sunday and is not the first day of month
+            if ($i > 1 && date('w', strtotime("$y-$m-$i")) == 0) {
+                // increment current week
+                ++$w;
+            }
+        }
+
+        // now return
+        return $w;
+    }
+
+    public function getSchedule()
+    {
+        $sql = <<<SQL
+SELECT v.*
+FROM videos AS v
+WHERE v.status = :video_status AND v.channel_id = :channel_id AND v.published_at >= :published_at
+ORDER BY v.published_at;
+SQL;
+
+        $data = (array)DB::select($sql, [
+            ':channel_id' => $this->channelId,
+            ':video_status' => Video::STATUS_ACTIVE,
+            ':published_at' => date('Y-m-d H:i:s', strtotime('- 4 weeks')),
+        ]);
+
+        $result = [];
+        foreach ($data as $item) {
+            $tzMoscow = new \DateTime($item->published_at, new \DateTimeZone('UTC'));
+            $tzMoscow->setTimezone(new \DateTimeZone('Europe/Moscow'));
+            $hour = (int)$tzMoscow->format('H');
+            $result[$this->weekOfMonth($tzMoscow->format('Y-m-d H:i:s'))]
+            [(int)$tzMoscow->format('N')]
+            [$hour] = $hour;
+        }
+
+        return $result;
     }
 }

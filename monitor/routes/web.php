@@ -34,3 +34,7 @@ Route::get('/channel/show/{id}', [ChannelController::class, 'show'])
 Route::get('/channels/statistics', [ChannelController::class, 'statistics'])
     ->name('channels_statistics');
 
+Route::get('/channels/schedule/{id}', [ChannelController::class, 'schedule'])
+    ->where(['id' => '[0-9]+'])
+    ->name('channels_schedule');
+

@@ -44,4 +44,13 @@ class ChannelController extends Controller
         ]);
     }
 
+    public function schedule($id)
+    {
+        $channel = new Channel($id);
+
+        return view('channel.schedule', [
+            'schedule' => $channel->getSchedule(),
+        ]);
+    }
+
 }

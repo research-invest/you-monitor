@@ -39,6 +39,7 @@
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
                                 <li><a class="dropdown-item" href="{{ route('channel_show', ['id' => $channel->id]) }}">Подробно</a></li>
+                                <li><a class="dropdown-item" href="{{ route('channels_schedule', ['id' => $channel->id]) }}">Расписание выходов видео</a></li>
                             </ul>
                         </div>
                     </td>
