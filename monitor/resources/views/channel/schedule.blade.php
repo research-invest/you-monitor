@@ -36,6 +36,7 @@
                                             <?php endif; ?>
                                         </span>
                                     @endfor
+                                    <div class="bg-light text-center"><?php echo isset($schedule[$w][$d]) ? count($schedule[$w][$d]) : '0' ?></div>
                                 </td>
                             @endfor
                         </tr>
