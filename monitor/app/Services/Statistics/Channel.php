@@ -129,13 +129,12 @@ SQL;
         $sql = <<<SQL
 SELECT v.*
 FROM videos AS v
-WHERE v.status = :video_status AND v.channel_id = :channel_id AND v.published_at >= :published_at
+WHERE v.channel_id = :channel_id AND v.published_at >= :published_at
 ORDER BY v.published_at;
 SQL;
 
         $data = (array)DB::select($sql, [
             ':channel_id' => $this->channelId,
-            ':video_status' => Video::STATUS_ACTIVE,
             ':published_at' => date('Y-m-d H:i:s', strtotime('- 4 weeks')),
         ]);
 
