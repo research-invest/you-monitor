@@ -1,7 +1,8 @@
 @extends('layouts.main')
-@section('title', 'Общая статистика каналов')
+@section('title', 'Расписание выходов роликов<')
 @section('content')
-    <h2 class="pb-2 border-bottom">Расписание выходов роликов</h2>
+    <h2 class="pb-2 border-bottom">Расписание выходов роликов - {{$channel->title}}</h2>
+    <a target="_blank" href="{{$channel->url}}" class="btn btn-sm btn-primary">Открыть канал</a>
     <div class="container">
         <div class="row">
             <div class="col-12">

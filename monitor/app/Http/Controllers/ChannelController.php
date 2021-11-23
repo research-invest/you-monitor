@@ -50,6 +50,7 @@ class ChannelController extends Controller
 
         return view('channel.schedule', [
             'schedule' => $channel->getSchedule(),
+            'channel' => $channel->getById(),
         ]);
     }
 
