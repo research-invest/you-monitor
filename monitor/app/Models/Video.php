@@ -33,6 +33,12 @@ class Video extends Model
         'length_seconds',
     ];
 
+    public function getPublishedAt(): string
+    {
+        $tzMoscow = new \DateTime($this->published_at, new \DateTimeZone('UTC'));
+        $tzMoscow->setTimezone(new \DateTimeZone('Europe/Moscow'));
+        return $tzMoscow->format('Y-m-d H:i:s');
+    }
 
     public function getUrlVideo()
     {

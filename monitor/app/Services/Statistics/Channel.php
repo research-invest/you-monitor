@@ -140,13 +140,16 @@ SQL;
         ]);
 
         $result = [];
-        foreach ($data as $item) {
-            $tzMoscow = new \DateTime($item->published_at, new \DateTimeZone('UTC'));
+        foreach ($data as $video) {
+            $tzMoscow = new \DateTime($video->published_at, new \DateTimeZone('UTC'));
             $tzMoscow->setTimezone(new \DateTimeZone('Europe/Moscow'));
             $hour = (int)$tzMoscow->format('H');
             $result[$this->weekOfMonth($tzMoscow->format('Y-m-d H:i:s'))]
             [(int)$tzMoscow->format('N')]
-            [$hour] = $hour;
+            [$hour] = [
+                'url_youtube' => $video->url,
+                'url' => route('video_show', ['id' => $video->id]),
+            ];
         }
 
         return $result;

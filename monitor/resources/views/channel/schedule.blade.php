@@ -28,7 +28,13 @@
                                 <td>
                                     @for ($h =1; $h <= 24; $h++)
                                         <?php $class = isset($schedule[$w][$d][$h]) ? 'text-white bg-success' : '' ?>
-                                        <span class="{{$class}} p-1 mt-1">{{ $h }}</span>
+                                        <span class="{{$class}} p-1 mt-1">
+                                            <?php if(isset($schedule[$w][$d][$h])): ?>
+                                              <a class="{{$class}}" target="_blank" href="{{ $schedule[$w][$d][$h]['url'] }}">{{ $h }}</a>
+                                            <?php else: ?>
+                                                {{ $h }}
+                                            <?php endif; ?>
+                                        </span>
                                     @endfor
                                 </td>
                             @endfor

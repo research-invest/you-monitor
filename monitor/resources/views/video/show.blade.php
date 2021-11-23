@@ -5,16 +5,16 @@
         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">{{$video->title}}</h1>
         @if(false):
-            <div class="btn-toolbar mb-2 mb-md-0">
-                <div class="btn-group me-2">
-                    <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
-                    <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
-                </div>
-                <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
-                    <span data-feather="calendar"></span>
-                    This week
-                </button>
+        <div class="btn-toolbar mb-2 mb-md-0">
+            <div class="btn-group me-2">
+                <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
+                <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
             </div>
+            <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
+                <span data-feather="calendar"></span>
+                This week
+            </button>
+        </div>
         @endif
     </div>
 
@@ -26,7 +26,10 @@
             <div class="col-md-8">
                 <div class="card-body">
                     <h5 class="card-title">{{$video->title}}</h5>
-                    <p class="card-text">Длительность: {{gmdate("i:s", $video->length_seconds) }} сек.</p>
+                    <p class="card-text">
+                        Длительность: {{gmdate("i:s", $video->length_seconds) }} сек. <br>
+                        Время выхода: {{$video->getPublishedAt()}}
+                    </p>
                     {{--                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>--}}
                     <a target="_blank" href="{{$video->url}}" class="btn btn-sm btn-primary">Открыть видео</a>
                     <a target="_blank" href="{{$video->channel->url}}" class="btn btn-sm btn-primary">Открыть канал</a>
