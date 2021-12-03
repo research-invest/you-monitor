@@ -24,7 +24,7 @@ SELECT c.id, c.title AS channel_title, MAX(v.views) as max_views
 FROM channels AS c
 INNER JOIN history_data_channels AS h ON c.id = h.channel_id
 INNER JOIN videos AS v ON v.channel_id = h.channel_id AND v.status = :video_status
-WHERE c.status = :channel_status
+WHERE c.status = :channel_status AND v.published_at >= :published_at
 GROUP BY c.id, c.title
 ORDER BY max_views DESC
 LIMIT 7;
@@ -33,6 +33,7 @@ SQL;
         $this->channels = DB::select($sql, [
             ':video_status' => Video::STATUS_ACTIVE,
             ':channel_status' => Channel::STATUS_ACTIVE,
+            ':published_at' => date('Y-m-d H:i:s', strtotime('- 48 hours')),
         ]);
     }
 
@@ -43,7 +44,7 @@ SELECT c.id AS channel_id, c.title AS channel_title, v.id AS video_id, v.title A
 FROM channels AS c
 INNER JOIN history_data_videos AS h ON c.id = h.channel_id
 INNER JOIN videos AS v ON v.id = h.video_id AND v.status = :video_status
-WHERE c.status = :channel_status
+WHERE c.status = :channel_status AND v.published_at >= :published_at
 GROUP BY c.id, c.title, v.id, v.title
 ORDER BY max_views DESC;
 SQL;
@@ -51,6 +52,7 @@ SQL;
         $this->drilldown = DB::select($sql, [
             ':video_status' => Video::STATUS_ACTIVE,
             ':channel_status' => Channel::STATUS_ACTIVE,
+            ':published_at' => date('Y-m-d H:i:s', strtotime('- 48 hours')),
         ]);
     }
 
